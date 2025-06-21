@@ -2,7 +2,7 @@
 
 namespace Pizza.API.Persistencia
 {
-    public class PizzaDbContext : DbContext
+    public class PizzaDbContext(DbContextOptions<PizzaDbContext> options) : DbContext
     {
         public DbSet<Models.Pizza> Pizzas { get; set; }
 

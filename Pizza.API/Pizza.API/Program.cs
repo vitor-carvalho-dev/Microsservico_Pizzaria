@@ -13,7 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<PizzaRepository>();
+builder.Services.AddScoped<PizzaRepository>();
 
 builder.Services.AddProblemDetails();
 
