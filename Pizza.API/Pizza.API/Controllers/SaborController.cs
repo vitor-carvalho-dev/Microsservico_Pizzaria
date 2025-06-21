@@ -6,8 +6,8 @@ namespace Pizza.API.Controllers
 {
 
     [ApiController]
-    [Route("api/[controller]")]
-    public class SaborPizzaController(PizzaRepository _pizzaRepository) : ControllerBase
+    [Route("[controller]")]
+    public class SaborController(PizzaRepository _pizzaRepository) : ControllerBase
     {
         [HttpPost]
         public ActionResult<Models.Pizza> Create(Models.Pizza pizza)

@@ -14,6 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<PizzaRepository>();
+builder.Services.AddScoped<EstoqueRepository>();
 
 builder.Services.AddProblemDetails();
 

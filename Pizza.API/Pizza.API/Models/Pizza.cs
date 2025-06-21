@@ -3,7 +3,7 @@
     public class Pizza
     {
         public int Id { get; set; }
-        public string Nome { get; set; } = null!;
+        public string Sabor { get; set; } = null!;
 
         public int TempoPreparo { get; set; }
 
