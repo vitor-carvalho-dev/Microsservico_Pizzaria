@@ -1,11 +1,12 @@
 // Pizza API
 
 
+using Microsoft.EntityFrameworkCore;
 using Pizza.API.Persistencia;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+builder.Services.AddDbContext<PizzaDbContext>(options => options.UseInMemoryDatabase("pizza"));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
