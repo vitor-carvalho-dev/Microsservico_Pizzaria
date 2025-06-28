@@ -7,15 +7,15 @@ namespace Pedidos.API.HttpClients
         // 1. Criar o cliente http
         public sealed class Client(HttpClient httpClient)
         {
-            private static readonly string BaseUrl = "https://localhost:7279";
+            
             public async Task<Estoque?> GetEstoque(int pizzaId)
             {
-                return await httpClient.GetFromJsonAsync<Estoque>($"{BaseUrl}/estoque/pizza/{pizzaId}");
+                return await httpClient.GetFromJsonAsync<Estoque>($"/estoque/pizza/{pizzaId}");
             }
 
             public async Task UpdateEstoque(int pizzaId, int quantidade)
             {
-                var response = await httpClient.PutAsync($"{BaseUrl}/estoque/pizza/{pizzaId}/{quantidade}", null);
+                var response = await httpClient.PutAsync($"/estoque/pizza/{pizzaId}/{quantidade}", null);
                 // garante que da errado se der errado
                 response.EnsureSuccessStatusCode();
             }

@@ -3,8 +3,12 @@
 using Microsoft.EntityFrameworkCore;
 using Pizza.API.Percistence;
 using Pizza.API.Persistence;
+using Steeltoe.Discovery.Client;
+using Steeltoe.Discovery.Consul;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddServiceDiscovery(options => options.UseConsul());
 
 builder.Services.AddDbContext<PizzaDbContext>(optins => 
     optins.UseInMemoryDatabase("pizza"));
