@@ -1,77 +1,74 @@
-﻿using Pizza.API.Exceptions;
-using Pizza.API.Models;
+﻿using Pizza.API.Models;
 
-namespace Pizza.API.Persistencia
+namespace Pizza.API.Persistence
 {
     public class EstoqueRepository(PizzaDbContext dbContext)
     {
         public List<Estoque> GetAll() {
-
             return dbContext.Estoques.ToList();
         }
 
-        public Estoque GetById(int id) 
+        public Estoque GetById(int id)
         {
             var estoque = dbContext.Estoques.FirstOrDefault(e => e.Id == id);
 
-            if (estoque == null) {
-
-                throw new NaoEncontrado("Estoque nao encontrado");
+            if (estoque == null)
+            {
+                throw new NaoEncontradoException("Estoque não encontrado");
             }
 
             return estoque;
         }
 
         public Estoque Add(Estoque estoque) {
-            
-            var pizza = dbContext.Pizzas.FirstOrDefault(p => p.Id == estoque.PizzaId);
+            var pizza = dbContext.Pizzas.FirstOrDefault(e => e.Id == estoque.PizzaId);
 
-            if (pizza == null) {
-                throw new ArgumentException("A pizza ainda nao foi cadastrada!"); 
+            if (pizza == null)
+            {
+                throw new ArgumentException("A pizza ainda não foi cadastrada");
             }
 
             var existeEstoque = dbContext.Estoques.FirstOrDefault(e => e.PizzaId == estoque.PizzaId);
 
             if (existeEstoque is not null)
             {
-                throw new NaoEncontrado("Ja existe estoque cadastrado para a pizza");
+                throw new ArgumentException("Já existe estoque cadastrado para a pizza");
             }
 
             estoque.Pizza = pizza;
 
             dbContext.Estoques.Add(estoque);
-            dbContext.SaveChanges();    
+            dbContext.SaveChanges();
 
-            return estoque; 
+            return estoque;
         }
 
-        public Estoque GetByPizzaId(int pizzaId) 
-        {
+        public Estoque GetByPizzaId(int pizzaId) {
             var estoque = dbContext.Estoques.FirstOrDefault(e => e.PizzaId == pizzaId);
 
-            if (estoque is null)
+            if (estoque == null)
             {
-                throw new NaoEncontrado("Nao tem pizza com esse id");
+                throw new NaoEncontradoException("Pizza não encontrada");
             }
             return estoque;
         }
 
-        public Estoque Update(int pizzaId, int quantidadeRemover)
+        public Estoque Update(int pizzaId, int quantidadeARemover)
         {
             var estoque = GetByPizzaId(pizzaId);
 
-            if (quantidadeRemover > estoque.Quantidade)
+            if (quantidadeARemover > estoque.Quantidade )
             {
-                throw new ArgumentException("A quantidade é superior ao estoque atual");
+                throw new ArgumentException("A quantidade solicitada é superior ao estoque atual.");
             }
-            estoque.Quantidade -= quantidadeRemover;
+
+            estoque.Quantidade -= quantidadeARemover;
             estoque.AtualizadoEm = DateTime.UtcNow;
 
             dbContext.Update(estoque);
             dbContext.SaveChanges();
+
             return estoque;
         }
-
-        
     }
 }

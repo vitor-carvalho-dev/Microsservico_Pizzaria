@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Pizza.API.Models;
-using Pizza.API.Persistencia;
+using Pizza.API.Percistence;
 
 namespace Pizza.API.Controllers
 {
-
     [ApiController]
     [Route("[controller]")]
     public class SaborController(PizzaRepository _pizzaRepository) : ControllerBase
@@ -15,25 +13,20 @@ namespace Pizza.API.Controllers
             _pizzaRepository.Add(pizza);
             return CreatedAtAction(
                 nameof(GetById),
-                new {id =  pizza.Id},
-                pizza
-                );
+                new { id = pizza.Id },
+                pizza);
         }
 
         [HttpGet]
         public List<Models.Pizza> GetAll()
         {
-            {
-                return _pizzaRepository.GetAll();
-            }
+            return _pizzaRepository.GetAll();
         }
+
         [HttpGet("{id}")]
         public Models.Pizza GetById(int id)
         {
             return _pizzaRepository.GetById(id);
         }
-
-       
-
     }
 }

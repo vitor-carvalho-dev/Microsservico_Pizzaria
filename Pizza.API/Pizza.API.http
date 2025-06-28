@@ -1,0 +1,25 @@
+@host = http://localhost:5143
+
+
+### Cadstrar pizza
+POST {{host}}/sabor
+Content-Type: application/json
+
+{
+    "sabor": "Pepperoni",
+    "tempoPreparo": 15,
+    "preco": 10.5
+}
+
+### Cadstrar estoque
+POST {{host}}/estoque
+Content-Type: application/json
+
+{
+    "pizzaId": 1,
+    "quantidade": 10
+}
+
+### Reduzir o estoque
+POST {{host}}/estoque/pizza/1/2
+

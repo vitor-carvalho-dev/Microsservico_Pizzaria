@@ -1,0 +1,119 @@
+{
+	"info": {
+		"_postman_id": "9f02e9b5-03da-4579-80ed-519aa003daea",
+		"name": "PizzaAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Criar pizza",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"sabor\": \"{{$randomCity}}\",\r\n    \"tempoPreparo\": \"{{$randomInt}}\",\r\n    \"preco\": \"{{$randomPrice}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pizzaurl}}/sabor",
+					"host": [
+						"{{pizzaurl}}"
+					],
+					"path": [
+						"sabor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar Estoque",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pizzaId\": 1,\r\n    \"quantidade\": {{$randomInt}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{pizzaurl}}/estoque",
+					"host": [
+						"{{pizzaurl}}"
+					],
+					"path": [
+						"estoque"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get pizzas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{pizzaurl}}/sabor",
+					"host": [
+						"{{pizzaurl}}"
+					],
+					"path": [
+						"sabor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Estoques",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{pizzaurl}}/estoque",
+					"host": [
+						"{{pizzaurl}}"
+					],
+					"path": [
+						"estoque"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get pizza By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{pizzaurl}}/sabor/:id",
+					"host": [
+						"{{pizzaurl}}"
+					],
+					"path": [
+						"sabor",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

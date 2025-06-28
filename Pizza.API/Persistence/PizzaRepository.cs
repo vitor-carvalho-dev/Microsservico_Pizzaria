@@ -1,35 +1,31 @@
-﻿using Pizza.API.Exceptions;
+﻿using Pizza.API.Persistence;
 
-namespace Pizza.API.Persistencia
+namespace Pizza.API.Percistence
 {
     public class PizzaRepository(PizzaDbContext dbContext)
     {
-        
         public List<Models.Pizza> GetAll()
         {
             return dbContext.Pizzas.ToList();
         }
 
-        public Models.Pizza Add(Models.Pizza pizza) 
+        public Models.Pizza Add(Models.Pizza pizza)
         {
-
             dbContext.Pizzas.Add(pizza);
             dbContext.SaveChanges();
+
             return pizza;
-            
         }
 
-        public Models.Pizza? GetById(int id)
+        internal Models.Pizza GetById(int id)
         {
             var pizza = dbContext.Pizzas.FirstOrDefault(p => p.Id == id);
 
-            if (pizza == null) 
+            if (pizza is null)
             {
-                throw new NaoEncontrado("Nao tem pizza com esse id");
+                throw new NaoEncontradoException("Não tem pizza com este id");
             }
             return pizza;
         }
-
-
     }
 }
