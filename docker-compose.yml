@@ -6,6 +6,7 @@ services:
       - "5001:8500"
 
   pedidosapi:
+    # image: ${DOCKER_REGISTRY-}pedidosapi
     build:
       context: .
       dockerfile: Pedido.API/Dockerfile    
@@ -14,10 +15,11 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
 
   pizzaapi:
+    # image: ${DOCKER_REGISTRY-}pizzaapi
     build:
       context: .
       dockerfile: Pizza.API/Dockerfile
-     environment:
+    environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
   apigateway:
