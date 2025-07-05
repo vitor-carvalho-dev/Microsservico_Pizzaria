@@ -10,9 +10,16 @@ namespace Pedidos.API.Controllers
     {
 
         [HttpGet("{id}")]
-        public Pedido GetById(Guid id)
+        public async Task<ActionResult<Pedido>> GetById(Guid id)
         {
-            return pedidoService.GetById(id);
+            try
+            {
+                return pedidoService.GetById(id);
+            }
+            catch (System.Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         [HttpGet]
@@ -22,9 +29,10 @@ namespace Pedidos.API.Controllers
         }
 
         [HttpPost]
-        public async Task<Pedido> Add(Pedido pedido)
+        public async Task<ActionResult<Pedido>> Add(Pedido pedido)
         {
-            return await pedidoService.Add(pedido);
+            await pedidoService.Add(pedido);
+            return CreatedAtAction(nameof(GetById), new {id = pedido.Id}, pedido);
         }
     }
 }

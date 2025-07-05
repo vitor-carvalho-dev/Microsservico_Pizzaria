@@ -15,7 +15,7 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
       - Consul__Discovery__Hostname=notificacoesapi
     ports:
-      - "4009:8080"
+      - "4001:8080"
 
   pedidosapi:
     # image: ${DOCKER_REGISTRY-}pedidosapi

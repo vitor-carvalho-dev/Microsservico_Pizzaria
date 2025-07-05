@@ -1,16 +1,17 @@
-﻿using Pizza.API.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Pizza.API.Models;
 
 namespace Pizza.API.Persistence
 {
     public class EstoqueRepository(PizzaDbContext dbContext)
     {
         public List<Estoque> GetAll() {
-            return dbContext.Estoques.ToList();
+            return dbContext.Estoques.Include(e=>e.Pizza).ToList();
         }
 
         public Estoque GetById(int id)
         {
-            var estoque = dbContext.Estoques.FirstOrDefault(e => e.Id == id);
+            var estoque = dbContext.Estoques.Include(e=>e.Pizza).FirstOrDefault(e => e.Id == id);
 
             if (estoque == null)
             {
@@ -44,7 +45,7 @@ namespace Pizza.API.Persistence
         }
 
         public Estoque GetByPizzaId(int pizzaId) {
-            var estoque = dbContext.Estoques.FirstOrDefault(e => e.PizzaId == pizzaId);
+            var estoque = dbContext.Estoques.Include(e=>e.Pizza).FirstOrDefault(e => e.PizzaId == pizzaId);
 
             if (estoque == null)
             {
@@ -53,11 +54,11 @@ namespace Pizza.API.Persistence
             return estoque;
         }
 
-        public Estoque Update(int pizzaId, int quantidadeARemover)
+        public async Task<Estoque> Update(int pizzaId, int quantidadeARemover)
         {
             var estoque = GetByPizzaId(pizzaId);
 
-            if (quantidadeARemover > estoque.Quantidade )
+            if (quantidadeARemover > estoque.Quantidade)
             {
                 throw new ArgumentException("A quantidade solicitada é superior ao estoque atual.");
             }

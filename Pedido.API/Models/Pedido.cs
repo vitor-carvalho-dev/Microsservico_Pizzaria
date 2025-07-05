@@ -10,12 +10,14 @@ namespace Pedidos.API.Models
         public string Cliente { get; set; } = string.Empty;
         public int PizzaId { get; set; }
         public int Quantidade { get; set; }
-        public enum SatusPedido
+        public enum SituacaoEnum
         {
             Recebido,
             EmPreparacao,
             Finalizado
         }
+        public SituacaoEnum SituacaoId { get; set; } = SituacaoEnum.Recebido;
+        public string Situacao => SituacaoId.ToString();
         public DateTime CriadoEm {  get; set; } = DateTime.UtcNow;
         public DateTime AtualizadoEm {  get; set; } 
     }

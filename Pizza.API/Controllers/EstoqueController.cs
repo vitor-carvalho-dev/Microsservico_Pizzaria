@@ -36,9 +36,16 @@ namespace Pizza.API.Controllers
         }
 
         [HttpPut("pizza/{pizzaId}/{quantidade}")]
-        public Estoque Update(int pizzaId, int quantidade)
+        public async Task<ActionResult<Estoque>> Update(int pizzaId, int quantidade)
         {
-            return _estoqueRepository.Update(pizzaId, quantidade);
+            try
+            {
+                return await _estoqueRepository.Update(pizzaId, quantidade);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
