@@ -8,7 +8,8 @@ using Steeltoe.Discovery.Consul;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddServiceDiscovery(options => options.UseConsul());
+builder.Services.AddServiceDiscovery(options =>
+    options.UseConsul());
 
 builder.Services.AddDbContext<PizzaDbContext>(optins => 
     optins.UseInMemoryDatabase("pizza"));

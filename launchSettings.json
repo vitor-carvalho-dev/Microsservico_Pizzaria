@@ -6,7 +6,7 @@
       "serviceActions": {
         "pedidos.api": "StartDebugging",
         "pizza.api": "StartDebugging",
-        "apigateway": "StartDebugging"
+        "gateway.api": "StartDebugging"
       }
     }
   }

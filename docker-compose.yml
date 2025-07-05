@@ -9,24 +9,31 @@ services:
     # image: ${DOCKER_REGISTRY-}pedidosapi
     build:
       context: .
-      dockerfile: Pedido.API/Dockerfile    
+      dockerfile: Pedido.API/Dockerfile
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIROMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
-
+    ports:
+      - "4002:8080"
   pizzaapi:
     # image: ${DOCKER_REGISTRY-}pizzaapi
     build:
       context: .
       dockerfile: Pizza.API/Dockerfile
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIROMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
-  apigateway:
-    image: ${DOCKER_REGISTRY-}apigateway
+    ports:
+      - "4003:8080"
+
+  gatewayapi:
+    image: ${DOCKER_REGISTRY-}gatewayapi
     build:
       context: .
-      dockerfile: APIGateway/Dockerfile
+      dockerfile: Gateway.API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIROMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
     ports:
       - "3001:8080"
 

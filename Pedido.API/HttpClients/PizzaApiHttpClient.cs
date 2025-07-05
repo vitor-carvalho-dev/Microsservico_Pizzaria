@@ -7,7 +7,6 @@ namespace Pedidos.API.HttpClients
         // 1. Criar o cliente http
         public sealed class Client(HttpClient httpClient)
         {
-            
             public async Task<Estoque?> GetEstoque(int pizzaId)
             {
                 return await httpClient.GetFromJsonAsync<Estoque>($"/estoque/pizza/{pizzaId}");
