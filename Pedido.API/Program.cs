@@ -8,6 +8,7 @@ using Steeltoe.Discovery.Consul;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddHealthChecks();
 builder.Services.AddServiceDiscovery(options =>
     options.UseConsul());
 
@@ -24,6 +25,9 @@ builder.Services.AddScoped<PedidoService>();
 builder.Services.AddHttpClient<PizzaApiHttpClient.Client>(options =>
     options.BaseAddress = new Uri("http://pizza-service")).AddServiceDiscovery();
 
+builder.Services.AddHttpClient<NotificacoesApiHttpClient.ClientNotification>(options =>
+    options.BaseAddress = new Uri("http://notificacoes-service")).AddServiceDiscovery();
+
 var app = builder.Build();
 
 app.UseSwagger();
@@ -36,4 +40,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseHealthChecks("/health");
 app.Run();

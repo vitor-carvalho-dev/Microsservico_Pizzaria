@@ -11,6 +11,8 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway.API", "Gateway.API\Gateway.API.csproj", "{7785F800-3448-4DF6-B8E4-F1A8C1652B30}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificacoesAPI", "NotificacoesAPI\NotificacoesAPI.csproj", "{C5223587-A638-4E93-8912-DF879FE63CC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{7785F800-3448-4DF6-B8E4-F1A8C1652B30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7785F800-3448-4DF6-B8E4-F1A8C1652B30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7785F800-3448-4DF6-B8E4-F1A8C1652B30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5223587-A638-4E93-8912-DF879FE63CC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5223587-A638-4E93-8912-DF879FE63CC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5223587-A638-4E93-8912-DF879FE63CC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5223587-A638-4E93-8912-DF879FE63CC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

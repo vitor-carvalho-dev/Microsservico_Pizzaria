@@ -5,6 +5,18 @@ services:
     ports:
       - "5001:8500"
 
+  notificacoesapi:
+    image: brunoosilva/ms-notificacoesservice
+    # build:
+    #   context: .
+    #   dockerfile: NotificacoesAPI/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIROMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - Consul__Discovery__Hostname=notificacoesapi
+    ports:
+      - "4009:8080"
+
   pedidosapi:
     # image: ${DOCKER_REGISTRY-}pedidosapi
     build:
@@ -15,6 +27,7 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
     ports:
       - "4002:8080"
+
   pizzaapi:
     # image: ${DOCKER_REGISTRY-}pizzaapi
     build:
@@ -36,4 +49,13 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
     ports:
       - "3001:8080"
+
+  fake-smtp-server:
+    image: gessnerfl/fake-smtp-server:latest
+    container_name: "fake-smtp-server"
+    restart: always
+    ports:
+      # - 8025:8025      #expose smtp port
+      - 7001:8080      #expose web ui
+      - 7002:8081      #expose management api
 

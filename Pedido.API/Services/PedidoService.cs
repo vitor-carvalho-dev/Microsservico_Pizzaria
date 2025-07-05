@@ -7,7 +7,8 @@ namespace Pedidos.API.Services
 {
     public class PedidoService(
         PedidoRepository repository,
-        PizzaApiHttpClient.Client pizzaApi)
+        PizzaApiHttpClient.Client pizzaApi,
+        NotificacoesApiHttpClient.ClientNotification notificacaoApi)
     {
         // Obter por id
         public Pedido GetById(Guid id)
@@ -44,6 +45,11 @@ namespace Pedidos.API.Services
             repository.Add(pedido);
             
             // 4. Notificar o cliente
+            await notificacaoApi.CriarNotificacaoAsync(
+                pedido.Id.ToString(),
+                pedido.Cliente,
+                $"Seu pedido {pedido.Id} foi confirmado"
+            );
 
             return pedido;
         }
